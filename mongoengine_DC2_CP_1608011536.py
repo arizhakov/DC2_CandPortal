@@ -1,29 +1,41 @@
 print "\n===== \n"
 from mongoengine import *
 
-connect('tumblelog')
+connect('DC2_CP')
 
 # [] http://docs.mongoengine.org/tutorial.html
 
-'''
-In our Tumblelog application we need to store several different types of 
-information. We will need to have a collection of users, so that we may link 
-posts to an individual. We also need to store our different types of posts 
-(eg: text, image and link) in the database. To aid navigation of our Tumblelog, 
-posts may have tags associated with them, so that the list of posts shown to the 
-user may be limited to posts that have been assigned a specific tag. Finally, it 
-would be nice if comments could be added to posts. We’ll start with users, as 
-the other document models are slightly more involved.
-'''
-
 # Users
 class User(Document):
+    # Datable Candidate Application, Section 1, "Required's"
     email = StringField(required=True)
-    first_name = StringField(max_length=50)
-    last_name = StringField(max_length=50)
+    first_name = StringField(required=True)
+    last_name = StringField(required=True)
+    github_url = StringField(required=True)
+    linkedin_url = StringField(required=True)
+    meetup_url = StringField(required=True)
+    twitter_url = StringField(required=True)
+    is_open_to_positions = BooleanField(default=False)
+    degrees = ListField(StringField(required=True))
+    is_citizen = BooleanField(default=False)
+    security_clearance = StringField(required=True) #?
+    dc2_events_attanded = ListField(StringField(required=True))
+    favorite_dc2_eventAndSpeaker = StringField(required=True) #?
+    
+    # Section 2, community engagement
+    is_comm_organizer = BooleanField(default=False)
+    is_volunteer_for_other_comm_events = BooleanField(default=False)
+    
+    
+    # Stats
+    created_at = DateTimeField(default=datetime.datetime.now)
 
+
+
+
+'''
 # Comment
-class Comment(EmbeddedDocument):
+class Comment(    ):
     content = StringField()
     name = StringField(max_length=120)
     # also, add to the Post class
@@ -49,9 +61,8 @@ class LinkPost(Post):
 # Tags
     # add to the Post class
 
+### Document structure defined
 
-
-# Document structure defined
 
 # Start adding User
 ross = User(email='ross@example.com', 
@@ -62,14 +73,13 @@ john = User(email='john@example.com',
             first_name='John', 
             last_name='the Hammer').save()
 
-'''
-or, can do:
-    ross = User(email='ross@example.com')
-    ross.first_name = 'Ross'
-    ross.last_name = 'Lawley'
-    ross.save()
-'''
-'''
+#or, alternatively, can add user by:
+bob = User(email='bob@example.com')
+bob.first_name = 'Bob'
+bob.last_name = 'Ross'
+bob.save()
+
+
 # add a couple of posts
 post1 = TextPost(title='Fun with MongoEngine', author=john)
 post1.content = 'Took a look at MongoEngine today, looks pretty cool.'
@@ -80,7 +90,8 @@ post2 = LinkPost(title='MongoEngine Documentation', author=ross)
 post2.link_url = 'http://docs.mongoengine.com/'
 post2.tags = ['mongoengine']
 post2.save()
-'''
+
+
 ## Accessing data
 #for post in Post.objects:
 #    print post.title
@@ -93,7 +104,8 @@ post2.save()
 ## self play 
 #for post in Post.objects:
 #    print post.comments.content
-'''
+
+
 for post in Post.objects:
     print post.title
     print '=' * len(post.title)
@@ -105,14 +117,24 @@ for post in Post.objects:
         print 'Link:', post.link_url
 
     print
-'''
+
+
+
 ## Searching our posts by tag
 
 #for post in Post.objects(tags='mongodb'):
 #    print post.title
 
-#num_posts = Post.objects(tags='mongodb').count()
-#print 'Found %d posts with tag "mongodb"' % num_posts
+num_posts = Post.objects(tags='mongodb').count()
+print 'Found %d posts with tag "mongodb"' % num_posts
 
 ## More?! to the User Guide!! [] http://docs.mongoengine.org/guide/index.html
+'''
 
+
+## Test adding a user
+bob = User(email='bob@example.com')
+bob.first_name = 'Bob'
+bob.last_name = 'Ross'
+bob.is_citizen = True
+bob.save()
