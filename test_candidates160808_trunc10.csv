@@ -1,0 +1,127 @@
+Candidate #,When was the last time you committed code?,What languages & libraries do you use?,What's your experience level?,What Data Science techniques have you worked with?,Have you managed teams before?,Do you have a Security Clearance?,What Degrees have you earned?,"Please describe three data science or data related projects you've worked on in the last three years. These can be features of larger projects, consulting projects, classified work described generally, or open source contributions.",Data Community DC Events Attended,Favorite Data Community DC Event & Speaker,Describe yourself in one sentence.,Have you ever presented your work at an event?,Where have you presented?,Startup and/or Business Experience?,What sectors have you worked in?,How have you worked in/with teams?,Have you accepted or would you accept freelance work?,"Have you ever founded a startup, or joined a startup in the early stages, that achieved market traction or better?","Have you ever been involved with BD, sales, or managed a client relationship?",Are you a community organizer?,Do you volunteer for others' community events?,Have you provided successful introductions to another community organizer?,Are you a US Citizen?
+2,2 weeks ago,"Python, R, Java","Advanced with statistics, geospatial analysis (GIS), Java. Beginner with R and Python","Clustering, visualization, mapping geographic data, regression, analysis of variance, principal components, pattern recognition, hotspot analysis, bioinformatics, many others over two decades","Yes, for the last 8 years. Geographically dispersed teams of analysts",None,"BS., M.S., Ph.D.","Environmental assessments using geospatial and socioeconomic data to inform sustainable development planning in Myanmar, in my role as lead scientist at World Wildife Fund. See http://myanmarnaturalcapital.org/en for website under construction","Data Science DC, District Data Labs, GeoDC","District data labs, Tony Ojeda","Data scientist working at the interface of science, policy and managagement, with a deep and interdisciplinary background in computer science, biology, statistics, data mining, policy, project management, and environmental science","Yes, numerous times","Association of American Geographers, numerous other scientific and tech conferences, government policy meetings around the world, non-profit forums in Washington DC and elsewhere.","In graduate school in the '90s, worked with colleagues to develop and pitch an an idea for a cloud computing business to serve the bioinformatics sector. ","Bioinformatics, geospatial, environmental conservation, academia","I work with a large and distributed of group of scientists, data analysts, policy experts and program managers around the world to execute data projects for our international organization.",Yes,No,Yes,No,Yes,No,Yes
+3,Within the Last week,"Python, R, SAS, SQL",Entry Level (0 years),"SVD, Deep Learning & Neural Networks, Regression Analysis, Markov Chains","Managed a team, Built my own team",None,Masters,"RNA segment pairing, Database construction for catering company, Regession Analysis for air pollution data",Data Science DC,LISA FEDERER,I am a data driven person with an enthusiasm in coding. ,No,Have not presented my work. ,,Academia,,Yes,No,No,No,No,No,No
+4,Within the Last week,"Python, SQL, Numpy, SciPy, Sklearn",Entry Level (0 years),"NLP, Regression Analysis, Clustering, Predictive Modeling",No,None,"Bachelors, Masters, Ph.D.",Developed new college ranking systems using College Scorecard data. Working on White House sponsored hackathon aimed at reducing the wage gap. Collected data on bus locations to understand spatio-temporal complexity of DC traffic.,Data Science DC,"The State of Data Science Education, Gideon Mann","Hard-working, independent and creative data scientist.",No,None,,Academia,,Yes,No,No,No,No,No,
+5,Today!,"Python, R, SAS, SQL",Entry Level (0 years),"Regression Analysis, Predictive Modeling, Survival Analysis","Lead a team, Built my own team",None,Masters,"I did a project about twins in Multivariate Statistics Analysis course. I have used multiple regression model and mANOVA model to analyze the factors causing difference in twin’s cognitive behaviors and have done clusters and classification upon donation people and community in a project about donation behavior in my data analysis class. I have used several time series models to deal with the air pollution data which is a 5-year-hourly one in statistical consulting class. Besides these general statistical methods, there’s also substantial data visualization experience with tableau and python which was used in a high dimensional dataset of a MPI survey from Oxford Poverty & Human Development Initiative. ",Women Data Scientists DC,DC Python,This little woman is concentrated essence.,No,No. I didn't present my work at an event.,,Commercial,,No,No,No,No,No,No,
+6,I'm not committed to coding,"R, SQL, online python training:no use, sql training & esri mapping query:min use, working on R now with google analtyics. R:now",Entry Level (0 years),"Regression Analysis, Clustering, R work on clustering, harlan say baynessian/gaussian",No,None,"Bachelors, Masters",This is my first project:law enforcement:mapping. 2nd project:portfolio,"Data Science DC, Statistical Programming DC, Python. 2 years ago","R:Jared, health science cancer mapping.  would like more on courthouses","Self Starter, data, law enforcement, gismapping, organized, clean data, follow through, event organizer, serious good attitude/humor and ",No,law enforcement project asking Harlan to present. Working on data. None. ,,"Commercial, Non-Profit, computer company who had gov't clients:",,Yes,No,Yes,Yes,Yes,No,Yes
+7,Within the Last week,"Python, Java, Javascript, MongoDB, SQL, Pig Latin/ Hive/ Hadoop/Spark, Numpy, SciPy, Sklearn, MXNET",Entry Level (0 years),"Deep Learning & Neural Networks, Monte Carlo, Regression Analysis, Markov Chains, Clustering, Predictive Modeling",No,None,Masters,"Diabetic Retinopathy Detection
+Bike Sharing Demand
+Analysis of Prostate Cancer Clinical Endpoints of Overall Survival",None,Fast-Data  DC,"I am a hardworking  new grad who possesses an expert knowledge of machine learning, with some experience in the data field.",No,No,,Academia,,Yes,No,No,No,No,No,No
+8,Today!,"Python, R, SQL, Pig Latin/ Hive/ Hadoop/Spark, Numpy",Entry Level (0 years),"LSA/LDA, NLP, Regression Analysis, Bayes or Dempster Shafer classifiers, Clustering, Predictive Modeling",Managed a team,None,Masters,"Sports Analytics Research project: Working on a research project on Sports analytics that involves web scraping using Python and developing a predictive model on the team wins based on the analysis of web scraped Basketball players and teams data.
+
+Big Data – Reddit  Dataset                                                                                                                                  
+Analyze and predict systematic trends in the main themes that emerge from discussion forums across days.
+Extract the most influential forums and present them in a visually appealing manner using Pig, Hive and Impala
+Predict how many responses each discussion thread is likely to gather using Spark.
+
+SSRV Railways
+Developed a robust railway management system using SQL which facilitates users in carrying out all booking related transactions efficiently, enables its employees to keep track of these activities and make changes in trains schedules and ticket allotments.
+Worked on SQL for back end including ERD, logical and physical design; and developed front end using PHP and HTML
+
+","Data Science DC, Women Data Scientists DC",Data for good-how data escrow and science can help avoid rape, I’d really describe myself as a self motivated person with a versatile skill set with a keen interest in data analytics.,No,na,,Academia,,Yes,No,Yes,No,Yes,No,
+9,Within the Last week,"Python, R, SAS, SQL, Pig Latin/ Hive/ Hadoop/Spark",Entry Level (0 years),"Regression Analysis, Clustering, Predictive Modeling",Lead a team,None,Masters,"helping a bank to identify clustering among customers, churn analysis, clustering analysis","Data Science DC, Data Wranglers DC",Henri Dwyer,Never stop learning and digging into insights!,No,None,,"Government / Contractors, Commercial",,No,Yes,Yes,No,Yes,No,
+10,Within the Last month,"Java, SQL, Pig Latin/ Hive/ Hadoop/Spark",Entry Level (0 years),"Regression Analysis, Clustering, Prescriptive Modeling",Managed a set of teams,None,Bachelors," The Effect of Facebook Intensity and Age on Friendship, Fall 2014
+Merged large data from different databases onto SPSS and developed statistical models to determine level of Facebook use in relation to age.
+Explored and analyzed data to find different correlations and relations within a large data set.
+Prepared advanced data workbooks and compelling visualizations using Excel and PowerPoint to clearly communicate results of analysis at a research symposium. 
+The Relationship Between Locus of Control and Alcohol and Marijuana Use, Spring 2014; 
+Developed surveys and measurement methods to analyze the relationship between religiosity, locus of control, and substance use. 
+Merged data from multiple survey tools such as Survey Monkey and Survey Gizmo onto excel spreadsheet.
+Organized and structured data from excel into SPSS to analyze possible relationships based on the data collected.
+Prepared multiple papers, PowerPoint Presentations, and elevator speech with different results of analysis. 
+","Data Science DC, Women Data Scientists DC",Dr. Marie desJardins,I have very creative mind and thrive in diverse groups and settings.,Yes,,,,,,,No,No,Yes,Yes,Yes
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,I'm not committed to coding,None,Veteran (10+ years),None,Managed a team,None,Masters,None,Data Science DC,No one in particular - enjoy all events,"Excellent knowledge of Capitol Hill and research, writing and analytical skills",No,,,"Government / Contractors, Non-Profit",,Yes,No,No,No,No,No,Yes
