@@ -127,10 +127,8 @@ class User(General_info,
     
     # User Stats
     created_at = DateTimeField(default=datetime.datetime.now)
-    total_log_ins = IntField(default=0) 
+    total_log_ins = IntField(default=0)
 
-
-# <> how to import .csv into mongodb
 
 def test():
     ## Test adding a user 1
@@ -152,19 +150,13 @@ def test():
                 last_name='Duck').save()
 
 def test_csv():
-    with open('test_candidates160808_trunc10.csv', 'rb') as csvfile:
+    
+    with open('test_candidates160808_trunc3cx10r.csv', 'rb') as csvfile:
         spamreader = csv.reader(csvfile, 
                                 delimiter=',',
                                 skipinitialspace=True)
-        #temp_rows = [[]]
         row_id = 0
         for row in spamreader:
-            #print ', '.join(row)    
-            ## test spamreader reading, understand structure            
-            #print "row: ", row#, "\n"
-            #print "row[0]: ", row[0], "\n"
-            #print "len: ", len(row)
-            
             ## header row
             if row_id == 0:
                 for i in row:
@@ -174,54 +166,41 @@ def test_csv():
                         index__last_time_committed_code = row.index(i)
                     if i == "What languages & libraries do you use?":
                         index__languages_and_libraries = row.index(i)
+                row_id += 1
+            ## move to other rows in csv
             else:
-                user_name = row[index__user_id]
-                # Munge
-                print row[2]
-                '''
-                user_name = User(last_time_committed_code = row[index__last_time_committed_code],
-                                 languages_and_libraries = row[index__languages_and_libraries]).save()
-                '''
-                #print user_name.last_time_committed_code
+                user = User(user_id = row[index__user_id],
+                     last_time_committed_code = convert__last_time_committed_code(row[index__last_time_committed_code]), 
+                     languages_and_libraries = convert__languages_and_libraries(row[index__languages_and_libraries])).save()
+                row_id += 1
 
-                #temp_rows[row_id] = row # example first row
-                #print row
-            row_id += 1
-        
-    #print temp_rows
+
+def convert__last_time_committed_code(string):
+    if string == "Today":
+        return "Today"
+    elif string == "Within the Last week":
+        return "1Week"
+    elif string == "Within the Last month":
+        return "1Mnth"
+    elif string == "Within last 6 months":
+        return "6Mnth"
+    else:
+        return "None"
+
+def convert__languages_and_libraries(string):
+    return [x.strip() for x in string.split(',')]
+
+def test_query():
+    print "test_query"
     
-    '''
-    with open('test_candidates160808_trunc10_OUTPUT.csv', 'wb') as csvfile:
-        spamwriter = csv.reader(csvfile, 
-                                delimiter=',',
-                                skipinitialspace=True)
-        temp_rows = [[]]
-        row_id = 0
-        for row in spamreader:
-            #print ', '.join(row)    
-            ## test spamreader reading, understand structure            
-            #print "row: ", row#, "\n"
-            #print "row[0]: ", row[0], "\n"
-            print "len: ", len(row)
-            
-            ## header row
-            if row_id == 0:                
-                if row[0] == "Candidate #":
-                    temp_rows[row_id] = ["user_id"]
-                if row[1] == "When was the last time you committed code?":
-                    temp_rows[row_id].append("last_time_committed_code")
-                if row[2] == "What languages & libraries do you use?":
-                    temp_rows[row_id].append("last_time_committed_code")
-            else:
-                #temp_rows[row_id] = row # example first row
-                print row
-            row_id += 1
-            '''
-            
+    users_1Week = User.objects(last_time_committed_code = "1Week")
+    for user in users_1Week:
+        print user.user_id
     
 def main():
     #test()
     test_csv()
+    test_query()
 
 if __name__ == '__main__':
     main()
