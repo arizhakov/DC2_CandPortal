@@ -4,6 +4,11 @@ import pymongo
 import pandas as pd
 from pymongo import MongoClient
 
+pd.set_option('display.height', 1000)
+pd.set_option('display.max_rows', 500)
+pd.set_option('display.max_columns', 500)
+pd.set_option('display.width', 100)
+
 '''
 create similarity matrix between all candidates
     Whos most like each other?
@@ -27,7 +32,7 @@ print "=============\n"
 
 
 # 1. import MongoDB as pandas df, to process with numpy.
-def importMongoDB():
+def import_db_as_df():
     '''
     -> pull data from mongodb to python for analysis.
     “Pymongo” lib
@@ -49,10 +54,17 @@ def importMongoDB():
     db = client.DC2_CP #db = client.database_name
     collection = db.general_info #collection = db.collection_name
     data = pd.DataFrame(list(collection.find())) #continue with this. <>
-    print "data.size", data.size
-    print "data.head", data.head
     
-    #return data
+    ## preview data
+    #print "data.size", data.size
+    #print "data.head", data.head
+    #with pd.option_context('display.max_rows', 10, 'display.max_columns', 10):
+    #    print data.ix[:5,:5]
+    #print data.ix[:5,:5]
+    
+    return data
+
+
 
 # 2. generate similarity matrix
 
