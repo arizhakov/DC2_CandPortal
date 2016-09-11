@@ -208,9 +208,34 @@ def test_M():
     #plt.imshow(M, cmap='hot', interpolation='nearest')
     plt.imshow(M, cmap='rainbow', interpolation='nearest')
 
+def test_string_compare():
+    # http://stackoverflow.com/questions/8897593/similarity-between-two-text-documents
+    # ? http://stackoverflow.com/questions/2380394/simple-implementation-of-n-gram-tf-idf-and-cosine-similarity-in-python?noredirect=1&lq=1
+    # "Equivalent to CountVectorizer followed by TfidfTransformer." http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html
+    
+    from sklearn.feature_extraction.text import TfidfVectorizer
+
+    test_text_1 = ["I'd like an apple",
+                    "An apple a day keeps the doctor away",
+                    "Never compare an apple to an orange",
+                    "I prefer scikit-learn to Orange",
+                    "I'd like an apple",
+                    "I'd like an orange"]
+    test_text_2 = ["I'd like an apple",
+                   #"I'd like an apple",
+                   "I'd like an orange"]
+                   
+    vect = TfidfVectorizer(min_df=0)
+    tfidf = vect.fit_transform(test_text_2) #This is equivalent to fit followed by transform, but more efficiently implemented.
+    print tfidf             
+    print tfidf.get_feature_names()                   
+    print (tfidf * tfidf.T).A
+    
+
 def main():
     #test()
-    test_M()
+    #test_M()
+    test_string_compare()
 
 if __name__ == '__main__':
     main()
