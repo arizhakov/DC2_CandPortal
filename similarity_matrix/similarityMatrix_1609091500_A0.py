@@ -1,6 +1,9 @@
 from math import *
 import numpy as np
 import matplotlib.pyplot as plt
+from pymongo import MongoClient
+import pandas as pd
+
 
 '''
 create similarity matrix between all candidates
@@ -44,8 +47,8 @@ def import_db_as_df():
     http://djcinnovations.com/index.php/archives/103
     '''
     client = MongoClient() #client = MongoClient('localhost:27017')
-    db = client.DC2_CP #db = client.database_name
-    collection = db.general_info #collection = db.collection_name
+    db = client['DC2_CP'] #db = client.database_name
+    collection = db['general_info'] #collection = db.collection_name
     data = pd.DataFrame(list(collection.find())) #continue with this. <>
     
     ## preview data
@@ -212,43 +215,80 @@ def test_string_compare():
     # http://stackoverflow.com/questions/8897593/similarity-between-two-text-documents
     # ? http://stackoverflow.com/questions/2380394/simple-implementation-of-n-gram-tf-idf-and-cosine-similarity-in-python?noredirect=1&lq=1
     # "Equivalent to CountVectorizer followed by TfidfTransformer." http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html
-    
+    # http://stackoverflow.com/questions/32128802/how-to-use-sklearns-countvectorizerand-to-get-ngrams-that-include-any-punctua
+    # http://stackoverflow.com/questions/23850256/how-can-i-pass-a-preprocessor-to-tfidfvectorizer-sklearn-python
+
     from sklearn.feature_extraction.text import TfidfVectorizer
+    from nltk.tokenize import TreebankWordTokenizer
 
     test_text_1 = ["I'd like an apple",
-                    "An apple a day keeps the doctor away",
-                    "Never compare an apple to an orange",
-                    "I prefer scikit-learn to Orange",
-                    "I'd like an apple",
-                    "I'd like an orange"]
-    test_text_2 = ["I'd like an apple",
-                   #"I'd like an apple",
+                   "An apple a day keeps the doctor away",
+                   "Never compare an apple to an orange",
+                   "I prefer scikit-learn to Orange",
+                   "I'd like an apple",
                    "I'd like an orange"]
-                   
-    vect = TfidfVectorizer(min_df=0)
-    tfidf = vect.fit_transform(test_text_2) #This is equivalent to fit followed by transform, but more efficiently implemented.
-    print tfidf             
-    print tfidf.get_feature_names()                   
-    print (tfidf * tfidf.T).A
+    test_text_2 = ["I'd like an apple",
+                   "I'd like an apple orange"]
     
+    #<> add a stemming step? couse be useful for typos
+                   
+    vect = TfidfVectorizer(min_df=0,
+                           stop_words="english",
+                           #tokenizer=TreebankWordTokenizer().tokenize, #to get dashes,etc
+                           lowercase=True) 
+    tfidf = vect.fit_transform(test_text_2) #This is equivalent to fit followed by transform, but more efficiently implemented.
+    sim_M = (tfidf * tfidf.T).A
+    print "tfidf\n", tfidf       
+    print      
+    print "vect.get_feature_names()\n", vect.get_feature_names() 
+    print                  
+    print "similiarity matrix\n", sim_M
+    #plt.imshow(sim_M, cmap='rainbow', interpolation='nearest')
+    print "similarity between 2 sentences:", sim_M[0,1]
+
+def get_two_string_sim(v_1,v_2):
+    from sklearn.feature_extraction.text import TfidfVectorizer
+    from nltk.tokenize import TreebankWordTokenizer
+
+    test_text_2 = [v_1, v_2]
+    
+    #<> add a stemming step? couse be useful for typos
+                   
+    vect = TfidfVectorizer(min_df=0,
+                           stop_words="english",
+                           #tokenizer=TreebankWordTokenizer().tokenize, #to get dashes,etc
+                           lowercase=True) 
+    tfidf = vect.fit_transform(test_text_2) #This is equivalent to fit followed by transform, but more efficiently implemented.
+    sim_M = (tfidf * tfidf.T).A
+    print "tfidf\n", tfidf       
+    print      
+    print "vect.get_feature_names()\n", vect.get_feature_names() 
+    print                  
+    print "similiarity matrix\n", sim_M
+    #plt.imshow(sim_M, cmap='rainbow', interpolation='nearest')
+    print "similarity between 2 sentences:", sim_M[0,1]
+
+def get_types_first_row(row):
+    for i,val in enumerate(row):
+        if type(val) == unicode:
+            pass
+            
+def process():
+#==============================================================================
+#     1 - find types
+#     2 - find sim matrix for each type 
+#         a - 'get_candidate_sim_matrix' for T/F, 1/0 vectors
+#         b - 'get_two_string_sim' for strings,sentences
+#         c - ? for multiple-choice Q's
+#     3 - combine sim matrix by wt avg by num. of elements/Qs in each sim matrix
+#==============================================================================
 
 def main():
     #test()
-    #test_M()
-    test_string_compare()
+    #data1 = import_db_as_df()
+    test_M()
+    #test_string_compare()
+    #get_two_string_sim(s1,s2)
 
 if __name__ == '__main__':
     main()
-
-
-
-
-'''
-
->>> import numpy as np
->>> a = [3,5,6]
->>> b = [3,7,2]
->>> list(np.array(a) - np.array(b)) #for converting from np 'array' to 'list'
-[0, -2, 4]
-
-'''
