@@ -283,12 +283,38 @@ def get_types_via_first_row(row):
             
 def process():
 #==============================================================================
-#     1 - find types
+#     X1 - find types
+#     
+
+# OR
+#==============================================================================
+# making a collection within db for each type. Eg., all T/F q’s ie of `BooleanField` in mongoengine go into 
+# “class User_bool(TF1, 
+# 		TF2, 
+# 		…
+# 		)
+# ” ; 
+# and all strings of `StringField` go into 
+# “class User_str(TF1, 
+# 		TF2, 
+# 		…
+# 		)
+# ” ; 
+# and all strings of `StringField` with ordinal data and thus choices go into 
+# “class User_str_choices(TF1, 
+# 		TF2, 
+# 		…
+# 		)
+# ” ; 
+# Then, can import into different pd.df’s, and thus separated by type.     
+#==============================================================================
+
 #     2 - find sim matrix for each type 
 #         a - 'get_candidate_sim_matrix' for T/F, 1/0 vectors
 #         b - 'get_two_string_sim' for strings,sentences
 #         c - ? for multiple-choice Q's
 #     3 - combine sim matrix by wt avg by num. of elements/Qs in each sim matrix
+
 #==============================================================================
     pass
 

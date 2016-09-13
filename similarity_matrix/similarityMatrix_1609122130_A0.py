@@ -251,44 +251,138 @@ def get_two_string_sim(v_1,v_2):
     from nltk.tokenize import TreebankWordTokenizer
 
     test_text_2 = [v_1, v_2]
-    
+    print test_text_2
     #<> add a stemming step? couse be useful for typos
                    
+#    vect = TfidfVectorizer(min_df=0,
+#                           stop_words="english",
+#                           #tokenizer=TreebankWordTokenizer().tokenize, #to get dashes,etc
+#                           lowercase=True) 
     vect = TfidfVectorizer(min_df=0,
-                           stop_words="english",
-                           #tokenizer=TreebankWordTokenizer().tokenize, #to get dashes,etc
-                           lowercase=True) 
+                           stop_words="english")
     tfidf = vect.fit_transform(test_text_2) #This is equivalent to fit followed by transform, but more efficiently implemented.
     sim_M = (tfidf * tfidf.T).A
-    print "tfidf\n", tfidf       
-    print      
-    print "vect.get_feature_names()\n", vect.get_feature_names() 
-    print                  
-    print "similiarity matrix\n", sim_M
+    #print "tfidf\n", tfidf       
+    #print      
+    #print "vect.get_feature_names()\n", vect.get_feature_names() 
+    #print                  
+    #print "similiarity matrix\n", sim_M
     #plt.imshow(sim_M, cmap='rainbow', interpolation='nearest')
-    print "similarity between 2 sentences:", sim_M[0,1]
+    #print "similarity between 2 sentences:", sim_M[0,1]
+    return sim_M[0,1]
 
 def get_types_via_first_row(row):
+    i_bool = []
+    i_unic = []
+    i_list = []
     for i,val in enumerate(row):
-        print i
-        print val
+        #print i
+        #print val
         if type(val) == unicode:
-            print "element is of unicode type"
+            #print "element is of unicode type"
+            i_unic.append(i)
         elif val == False or val == True:
-            print "element is of bool type"
+            #print "element is of bool type"
+            i_bool.append(i)
         elif type(val) == list:
-            print "element is of list type"
-        
-        print
-            
+            #print "element is of list type"
+            i_list.append(i)
+        #print
+    return i_bool, i_unic, i_list
+
+def get_candidate_sim_matrix_bool(df):
+    num_candidates = df.shape[0]
+    candidate_sim_matrix = np.eye(num_candidates) # initialize candidate_sim_matrix
+    # loop for all unique pairs
+    for i in range(num_candidates - 1):
+        for j in range(i+1, num_candidates):
+            candidateSimilarity = get_two_candidate_sim(df.ix[i,:],
+                                                        df.ix[j,:])
+            candidate_sim_matrix[i,j] = candidateSimilarity
+            candidate_sim_matrix[j,i] = candidateSimilarity
+    return candidate_sim_matrix #matrix of NxN candidates with answer difference values between 0-1
+
+def get_candidate_sim_matrix_unic(df):
+    num_candidates = df.shape[0]
+    candidate_sim_matrix = np.eye(num_candidates) # initialize candidate_sim_matrix
+    # loop for all unique pairs
+    for i in range(num_candidates - 1):
+        for j in range(i+1, num_candidates):
+            s_pad = "xxxx"
+            v1 = df.ix[i,:] + s_pad # not efficient, but can be optimized later
+            v2 = df.ix[j,:] + s_pad # not efficient, but can be optimized later
+            candidateSimilarity = get_two_string_sim(v1,v2) #<> throwing the error. have to example the v1, v2 coming in
+            candidate_sim_matrix[i,j] = candidateSimilarity
+            candidate_sim_matrix[j,i] = candidateSimilarity
+    return candidate_sim_matrix #matrix of NxN candidates with answer difference values between 0-1
+
+def get_candidate_sim_matrix_list(df):
+    num_candidates = df.shape[0]
+    candidate_sim_matrix = np.eye(num_candidates) # initialize candidate_sim_matrix
+    # loop for all unique pairs
+    for i in range(num_candidates - 1):
+        for j in range(i+1, num_candidates):
+            # join list into string
+            v1 = ','.join(df.ix[i,:]) # not efficient, but can be optimized later
+            v2 = ','.join(df.ix[j,:]) # not efficient, but can be optimized later
+            candidateSimilarity = get_two_string_sim(v1,v2)
+            candidate_sim_matrix[i,j] = candidateSimilarity
+            candidate_sim_matrix[j,i] = candidateSimilarity
+    return candidate_sim_matrix #matrix of NxN candidates with answer difference values between 0-1
+
+def combine_single_sim_matrix(data):
+    
+    row0 = data.ix[0, :] # first row
+    i_bool, i_unic, i_list = get_types_via_first_row(row0) #get indices of types as lists
+    #print i_bool
+    df_bool = data.ix[:, i_bool]
+    df_unic = data.ix[:, i_unic]
+    df_list = data.ix[:, i_list]
+    bool_Q = df_bool.shape[1]
+    unic_Q = df_unic.shape[1]
+    list_Q = df_list.shape[1]
+    total_Q = float(data.shape[1])
+    simM_bool = get_candidate_sim_matrix_bool(df_bool)
+    simM_unic = get_candidate_sim_matrix_unic(df_unic)
+    simM_list = get_candidate_sim_matrix_list(df_list)
+    simM = simM_bool*(bool_Q/total_Q) + simM_unic*(unic_Q/total_Q) + simM_list*(list_Q/total_Q)
+    return simM
+
+
 def process():
 #==============================================================================
-#     1 - find types
+#     X1 - find types
+#     
+
+# OR
+#==============================================================================
+# making a collection within db for each type. Eg., all T/F q’s ie of `BooleanField` in mongoengine go into 
+# “class User_bool(TF1, 
+# 		TF2, 
+# 		…
+# 		)
+# ” ; 
+# and all strings of `StringField` go into 
+# “class User_str(TF1, 
+# 		TF2, 
+# 		…
+# 		)
+# ” ; 
+# and all strings of `StringField` with ordinal data and thus choices go into 
+# “class User_str_choices(TF1, 
+# 		TF2, 
+# 		…
+# 		)
+# ” ; 
+# Then, can import into different pd.df’s, and thus separated by type.     
+#==============================================================================
+
 #     2 - find sim matrix for each type 
 #         a - 'get_candidate_sim_matrix' for T/F, 1/0 vectors
 #         b - 'get_two_string_sim' for strings,sentences
 #         c - ? for multiple-choice Q's
 #     3 - combine sim matrix by wt avg by num. of elements/Qs in each sim matrix
+
 #==============================================================================
     pass
 
@@ -299,8 +393,10 @@ def main():
     #test_string_compare()
     #get_two_string_sim(s1,s2)
     
-    row1 = data1.loc[0,:]
-    get_types_via_first_row(row1)
+    #row1 = data1.loc[0,:]
+    #get_types_via_first_row(row1)
+    plt.imshow(combine_single_sim_matrix(data1), cmap='rainbow', interpolation='nearest')
+    
 
 if __name__ == '__main__':
     main()
