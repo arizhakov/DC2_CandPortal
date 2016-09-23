@@ -5,6 +5,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 from pymongo import MongoClient
 import pandas as pd
+from scipy.spatial.distance import cosine, euclidean
+
+#utilities
+import time
 
 
 '''
@@ -29,7 +33,7 @@ References:
 print "=============\n"
 
 
-# 1. import MongoDB as pandas df, to process with numpy.
+# 1. Import MongoDB as pandas dataframe for future processing and analysis.
 def import_db_as_df():
     '''
     -> pull data from mongodb to python for analysis.
@@ -55,26 +59,33 @@ def import_db_as_df():
         
     return data
 
-def get_max_diff(v1):
+
+# 2. Similarity matrix computation.
+### General functions (i.e., can be used for Boolean, MC, etc. functionality).
+## Distance functions.
+def get_euclidean_dist(v1, v2):
+    return euclidean(np.array(v1), np.array(v2))
+
+### processing Boolean-specific response.
+def get_max_diff_boolean(v1):
     return sqrt(float(len(v1)))
+def get_two_candidate_sim_boolean(v1, v2):
+    max_diff = get_max_diff_boolean(v1)
+    candidate_diff = get_euclidean_dist(v1, v2) / max_diff   # normalized Euclidean distance
+    candidate_sim = 1 - candidate_diff
+    return candidate_sim
 
-def get_normalized_EuclidDist(vector_differences,maximum_difference):
-    '''
-    AKA "candidate_difference"
-    '''
-    return np.sqrt(np.sum(np.square(np.array(vector_differences))))/maximum_difference # diff = np.array(v1)-np.array(v2)
+### Multiple Choice responses
+# Assmp1: know that answers are MC, and the order <<> how to know this beforehand?>
+# Approach 1: tell up front
+# Approach 2: collect all responses, put in list, get only unique vals
+# But still dont know order...
 
-def get_two_candidate_sim(v_1,v_2):
-    
-    max_diff = get_max_diff(v_1)
-    
-    v_diff = np.array(v_1)-np.array(v_2) # may need abs()?
-    
-    candidateDifference = get_normalized_EuclidDist(v_diff, max_diff)
 
-    candidateSimilarity = 1 - candidateDifference
-    
-    return candidateSimilarity
+
+
+
+
 
 
 def get_two_string_sim(v_1,v_2):
@@ -186,16 +197,66 @@ def combine_single_sim_matrix(data):
 
 def main():
     #test()
-    data1 = import_db_as_df()
+    ###data1 = import_db_as_df()
     #test_M()
     #test_string_compare()
     #get_two_string_sim(s1,s2)
     
     #row1 = data1.loc[0,:]
     #get_types_via_first_row(row1)
-    simM = combine_single_sim_matrix(data1)
-    plt.imshow(simM, cmap='rainbow', interpolation='nearest')
-    
+    ###simM = combine_single_sim_matrix(data1)
+    ###plt.imshow(simM, cmap='rainbow', interpolation='nearest')
+    ###plt.show(block=True)  # for PyCharm displaying
+
+    ## new boolean testing
+    # V1 = [True, False, True, False, True, False, True, True, False, True]
+    # V2 = [False, False, True, False, True, True, True, False, True, False]
+    # t0 = time.clock()
+    # print get_two_candidate_sim_Boolean(V1, V2)
+    # print time.clock() - t0
+    # t0 = time.clock()
+    # print get_two_candidate_sim(V1,V2)
+    # print time.clock() - t0
+
+    ## MC testing
+    # fibo = [1,2,3,5,8]
+    example_MC_ans = ["A", "B", "A", "C", "D", "E"]
+    example_MC_order = ["A", "B", "C", "D", "E"]
+
+    def gen_fib(n):
+        if n == 0:
+            return 0
+        elif n == 1:
+            return 1
+        else:
+            return gen_fib(n - 1) + gen_fib(n - 2)
+
+    # print gen_fib(5)
+
+    def get_fib_list(n):
+        fibo = []
+        shift = 2  # start Fib. seq. at a shifted window
+        for i in range(shift, n + shift):
+            fibo.append(gen_fib(i))
+        return fibo
+
+    fibo = get_fib_list(len(example_MC_order))
+    # print fibo
+
+    # max_fibo = max(fibo)
+
+    example_MC_ans_num = []
+    shift = 2  # start Fib. seq. at a shifted window
+    for i in example_MC_ans:
+        example_MC_ans_num.append(float(gen_fib(example_MC_order.index(i) + shift)))
+    print example_MC_ans_num
+
+    max_example_MC_ans_num = max(example_MC_ans_num)
+
+    example_MC_ans_num_norm = np.divide(example_MC_ans_num, max_example_MC_ans_num)
+    print example_MC_ans_num_norm
+
+
 
 if __name__ == '__main__':
     main()

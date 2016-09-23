@@ -216,7 +216,7 @@ def test():
 #<> make own function
 
 def test_csv(): #migrate_file_to_db
-    with open('../../Event Candidate Application (Responses) - Form_Responses_1.csv', 'rb') as csvfile:
+    with open('../../Data/Event Candidate Application (Responses) - Form_Responses_1.csv', 'rb') as csvfile:
         spamreader = csv.reader(csvfile, 
                                 delimiter=',',
                                 skipinitialspace=True)

@@ -5,6 +5,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 from pymongo import MongoClient
 import pandas as pd
+from scipy.spatial.distance import cosine, euclidean
+
+#utilities
+import time
 
 
 '''
@@ -55,6 +59,8 @@ def import_db_as_df():
         
     return data
 
+
+# 2. steps for similarity matrix computation.
 def get_max_diff(v1):
     return sqrt(float(len(v1)))
 
@@ -75,6 +81,23 @@ def get_two_candidate_sim(v_1,v_2):
     candidateSimilarity = 1 - candidateDifference
     
     return candidateSimilarity
+
+
+
+def get_max_diff_Boolean(v1):
+    return sqrt(float(len(v1)))
+
+def get_two_candidate_sim_Boolean(v1, v2):
+    max_diff = get_max_diff_Boolean(v1)
+    euclidean_dist = euclidean(np.array(v1), np.array(v2))
+    candidateDifference = euclidean_dist/max_diff   # normalized Euclidean distance
+    candidateSimilarity = 1 - candidateDifference
+    return candidateSimilarity
+
+
+
+
+
 
 
 def get_two_string_sim(v_1,v_2):
@@ -186,16 +209,25 @@ def combine_single_sim_matrix(data):
 
 def main():
     #test()
-    data1 = import_db_as_df()
+    ###data1 = import_db_as_df()
     #test_M()
     #test_string_compare()
     #get_two_string_sim(s1,s2)
     
     #row1 = data1.loc[0,:]
     #get_types_via_first_row(row1)
-    simM = combine_single_sim_matrix(data1)
-    plt.imshow(simM, cmap='rainbow', interpolation='nearest')
-    
+    ###simM = combine_single_sim_matrix(data1)
+    ###plt.imshow(simM, cmap='rainbow', interpolation='nearest')
+    ###plt.show(block=True)  # for PyCharm displaying
+
+    V1 = [True, False, True, False, True, False]
+    V2 = [False, False, True, False, True, True]
+    t0 = time.clock()
+    print get_two_candidate_sim(V1,V2)
+    print time.clock() - t0
+    t0 = time.clock()
+    print get_two_candidate_sim_Boolean(V1, V2)
+    print time.clock() - t0
 
 if __name__ == '__main__':
     main()
