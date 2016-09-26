@@ -30,8 +30,6 @@ References:
 [5] http://www.econ.upf.edu/~michael/stanford/maeb4.pdf
 
 '''
-print "=============\n"
-
 
 # 1. Import MongoDB as pandas dataframe for future processing and analysis.
 def import_db_as_df():
@@ -75,16 +73,72 @@ def get_two_candidate_sim_boolean(v1, v2):
     candidate_sim = 1 - candidate_diff
     return candidate_sim
 
+
+
 ### Multiple Choice responses
 # Assmp1: know that answers are MC, and the order <<> how to know this beforehand?>
 # Approach 1: tell up front
 # Approach 2: collect all responses, put in list, get only unique vals
 # But still dont know order...
 
+def test_MC():
+    ## MC testing
+    # fibo = [1,2,3,5,8]
+    example_MC_ans = ["A", "B", "A", "C", "D", "E"]
+    example_MC_order = ["A", "B", "C", "D", "E"]
 
+    def get_nth_fibonacci(n):
+        """
+        return n-th Fibonacci number, where 1st number in sequence is 0, 2nd = 1, 3rd = 1, 4th = 2, etc.
 
+        e.g.:
+        n Fib.
+        _ _
+        0 0
+        1 1
+        2 1
+        3 2
+        4 3
+        5 5
+        6 8
+        7 13
+        8 21
+        9 34
+        """
 
+        if n == 0:
+            return 0
+        elif n == 1:
+            return 1
+        else:
+            return get_nth_fibonacci(n - 1) + get_nth_fibonacci(n - 2)
 
+    def get_fib_list(n):
+        fibo = []
+        shift = 2  # start Fib. seq. at a shifted window
+        for i in range(shift, n + shift):
+            fibo.append(get_nth_fibonacci(i))
+        return fibo
+
+    fibo = get_fib_list(len(example_MC_order))
+    # print fibo
+
+    # max_fibo = max(fibo)
+
+    example_MC_ans_num = []
+    shift = 2  # start Fib. seq. at a shifted window
+    for i in example_MC_ans:
+        example_MC_ans_num.append(float(get_nth_fibonacci(example_MC_order.index(i) + shift)))
+    print example_MC_ans_num
+
+    max_example_MC_ans_num = max(example_MC_ans_num) # get max value of this q's answers. note: not the same as max in order list.
+
+    example_MC_ans_num_norm = np.divide(example_MC_ans_num, max_example_MC_ans_num)
+    print example_MC_ans_num_norm
+
+#<> separate out all the Boolean, MC, etc questions - how??
+#<> find example MC Q.
+#<> combine 2,3 MC Q's together. do above for each Q, then send each pair of norm. Fib. Cand's rows to Euler. dist. func.
 
 
 
@@ -218,45 +272,10 @@ def main():
     # print get_two_candidate_sim(V1,V2)
     # print time.clock() - t0
 
-    ## MC testing
-    # fibo = [1,2,3,5,8]
-    example_MC_ans = ["A", "B", "A", "C", "D", "E"]
-    example_MC_order = ["A", "B", "C", "D", "E"]
-
-    def gen_fib(n):
-        if n == 0:
-            return 0
-        elif n == 1:
-            return 1
-        else:
-            return gen_fib(n - 1) + gen_fib(n - 2)
-
-    # print gen_fib(5)
-
-    def get_fib_list(n):
-        fibo = []
-        shift = 2  # start Fib. seq. at a shifted window
-        for i in range(shift, n + shift):
-            fibo.append(gen_fib(i))
-        return fibo
-
-    fibo = get_fib_list(len(example_MC_order))
-    # print fibo
-
-    # max_fibo = max(fibo)
-
-    example_MC_ans_num = []
-    shift = 2  # start Fib. seq. at a shifted window
-    for i in example_MC_ans:
-        example_MC_ans_num.append(float(gen_fib(example_MC_order.index(i) + shift)))
-    print example_MC_ans_num
-
-    max_example_MC_ans_num = max(example_MC_ans_num)
-
-    example_MC_ans_num_norm = np.divide(example_MC_ans_num, max_example_MC_ans_num)
-    print example_MC_ans_num_norm
-
+    test_MC()
 
 
 if __name__ == '__main__':
+    print "====="
     main()
+    print "====="
