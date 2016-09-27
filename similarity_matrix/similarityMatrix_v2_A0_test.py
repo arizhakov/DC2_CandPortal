@@ -84,7 +84,7 @@ def get_two_candidate_sim_boolean(v1, v2):
 def test_MC():
     ## MC testing
     # fibo = [1,2,3,5,8]
-    example_MC_ans = ["A", "B", "A", "C", "D", "E"]
+    example_MC_ans = ["A", "B", "A", "C", "D", "E", "E"]
     example_MC_order = ["A", "B", "C", "D", "E"]
 
     def get_nth_fibonacci(n):
@@ -139,6 +139,9 @@ def test_MC():
 #<> separate out all the Boolean, MC, etc questions - how??
 #<> find example MC Q.
 #<> combine 2,3 MC Q's together. do above for each Q, then send each pair of norm. Fib. Cand's rows to Euler. dist. func.
+##<> 1. convert MC answer to Fib-scaled num.
+##<> 2. scale by max
+##<> 3. feed each row aka C's array into sim. M.
 
 
 
